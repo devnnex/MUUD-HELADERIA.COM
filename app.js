@@ -1213,3 +1213,26 @@ checkoutOverlay.addEventListener("click", (e) => {
 
 
 
+
+
+
+// === Carrusel de promociones ===
+const track = document.querySelector('.banner-track');
+const slides = document.querySelectorAll('.banner-slide');
+const nextBtn = document.querySelector('.banner-btn.next');
+const prevBtn = document.querySelector('.banner-btn.prev');
+
+if (track && slides.length > 1) {
+  let index = 0;
+
+  function showSlide(i) {
+    index = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  nextBtn.addEventListener('click', () => showSlide(index + 1));
+  prevBtn.addEventListener('click', () => showSlide(index - 1));
+
+  // Auto-slide cada 5s
+  setInterval(() => showSlide(index + 1), 5000);
+}
