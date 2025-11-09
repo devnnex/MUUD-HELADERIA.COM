@@ -1502,3 +1502,76 @@ body {
 .extra-item.agotado img {
   filter: grayscale(100%);
 }
+
+
+
+
+
+
+
+/* === PROMO BANNER === */
+.promo-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 12px auto;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface, #fff);
+  box-shadow: var(--shadow-soft, 0 4px 14px rgba(0, 0, 0, 0.1));
+}
+
+.banner-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 300%;
+}
+
+.banner-slide {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+   
+}
+
+/* Botones de navegación */
+.banner-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  font-size: 1.8rem;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s;
+}
+
+.banner-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.banner-btn.prev { left: 8px; }
+.banner-btn.next { right: 8px; }
+
+/* 🔄 Auto-slide animation (opcional) */
+@keyframes bannerAuto {
+  0%, 33% { transform: translateX(0%); }
+  34%, 66% { transform: translateX(-100%); }
+  67%, 99% { transform: translateX(-200%); }
+  100% { transform: translateX(0%); }
+}
+
+.promo-banner.auto .banner-track {
+  animation: bannerAuto 10s infinite ease-in-out;
+}
