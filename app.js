@@ -14,26 +14,26 @@ const products = [
     price: 8800,
     desc: 'Justo para refrescarte y consentirte.',
     ingredients: ['Brownie', 'Queso', 'Chocmelos', 'Chócaramo', 'Quipitos', 'Leche condensada', 'Chips de chocolate', 'Mango', 'Oreo', 'Milo', 'Hershey’s', 'Arequipe Alpina', 'Piazza', 'Chokis', 'Minichips', 'Maní', 'Klim', 'Chocolatina Jumbo'],
-    extras: [
-      { name: 'Brownie', price: 3000 },
-      { name: 'Queso', price: 3000 },
-      { name: 'Chocmelos', price: 3000 },
-      { name: 'Chócaramo', price: 3000 },
-      { name: 'Quipitos', price: 3000 },
-      { name: 'Leche condensada', price: 3000 },
-      { name: 'Chips de chocolate', price: 3000 },
-      { name: 'Mango', price: 3000 },
-      { name: 'Oreo', price: 3000 },
-      { name: 'Milo', price: 3000 },
-      { name: 'Hershey’s', price: 3000 },
-      { name: 'Arequipe Alpina', price: 3000 },
-      { name: 'Piazza', price: 3000 },
-      { name: 'Chokis', price: 3000 },
-      { name: 'Minichips', price: 3000 },
-      { name: 'Maní', price: 3000 },
-      { name: 'Klim', price: 3000 },
-      { name: 'Chocolatina Jumbo', price: 3000 }
-    ],
+   extras:[
+  { id: 'extra1', name: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', name: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', name: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', name: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', name: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', name: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', name: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', name: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', name: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', name: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', name: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', name: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', name: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', name: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', name: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', name: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', name: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', name: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+],
     image: 'images/helado1.png'
   },
   {
@@ -43,26 +43,26 @@ const products = [
     price: 11800,
     desc: 'Una porción ideal para compartir.',
     ingredients: ['Brownie', 'Queso', 'Chocmelos', 'Chócaramo', 'Quipitos', 'Leche condensada', 'Chips de chocolate', 'Mango', 'Oreo', 'Milo', 'Hershey’s', 'Arequipe Alpina', 'Piazza', 'Chokis', 'Minichips', 'Maní', 'Klim', 'Chocolatina Jumbo'],
-    extras: [
-      { name: 'Brownie', price: 3000 },
-      { name: 'Queso', price: 3000 },
-      { name: 'Chocmelos', price: 3000 },
-      { name: 'Chócaramo', price: 3000 },
-      { name: 'Quipitos', price: 3000 },
-      { name: 'Leche condensada', price: 3000 },
-      { name: 'Chips de chocolate', price: 3000 },
-      { name: 'Mango', price: 3000 },
-      { name: 'Oreo', price: 3000 },
-      { name: 'Milo', price: 3000 },
-      { name: 'Hershey’s', price: 3000 },
-      { name: 'Arequipe Alpina', price: 3000 },
-      { name: 'Piazza', price: 3000 },
-      { name: 'Chokis', price: 3000 },
-      { name: 'Minichips', price: 3000 },
-      { name: 'Maní', price: 3000 },
-      { name: 'Klim', price: 3000 },
-      { name: 'Chocolatina Jumbo', price: 3000 }
-    ],
+    extras:[
+  { id: 'extra1', name: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', name: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', name: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', name: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', name: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', name: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', name: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', name: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', name: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', name: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', name: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', name: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', name: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', name: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', name: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', name: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', name: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', name: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+],
     image: 'images/helado2.png'
   },
   {
@@ -72,26 +72,26 @@ const products = [
     price: 15500,
     desc: 'Saboréalo con quien quieras.',
     ingredients: ['Brownie', 'Queso', 'Chocmelos', 'Chócaramo', 'Quipitos', 'Leche condensada', 'Chips de chocolate', 'Mango', 'Oreo', 'Milo', 'Hershey’s', 'Arequipe Alpina', 'Piazza', 'Chokis', 'Minichips', 'Maní', 'Klim', 'Chocolatina Jumbo'],
-    extras: [
-      { name: 'Brownie', price: 3000 },
-      { name: 'Queso', price: 3000 },
-      { name: 'Chocmelos', price: 3000 },
-      { name: 'Chócaramo', price: 3000 },
-      { name: 'Quipitos', price: 3000 },
-      { name: 'Leche condensada', price: 3000 },
-      { name: 'Chips de chocolate', price: 3000 },
-      { name: 'Mango', price: 3000 },
-      { name: 'Oreo', price: 3000 },
-      { name: 'Milo', price: 3000 },
-      { name: 'Hershey’s', price: 3000 },
-      { name: 'Arequipe Alpina', price: 3000 },
-      { name: 'Piazza', price: 3000 },
-      { name: 'Chokis', price: 3000 },
-      { name: 'Minichips', price: 3000 },
-      { name: 'Maní', price: 3000 },
-      { name: 'Klim', price: 3000 },
-      { name: 'Chocolatina Jumbo', price: 3000 }
-    ],
+     extras:[
+  { id: 'extra1', name: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', name: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', name: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', name: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', name: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', name: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', name: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', name: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', name: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', name: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', name: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', name: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', name: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', name: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', name: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', name: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', name: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', name: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+],
     image: 'images/helado3.png'
   },
   {
@@ -101,26 +101,26 @@ const products = [
     price: 2200,
     desc: 'Muudie clásico para cualquier momento.',
     ingredients: ['Brownie', 'Queso', 'Chocmelos', 'Chócaramo', 'Quipitos', 'Leche condensada', 'Chips de chocolate', 'Mango', 'Oreo', 'Milo', 'Hershey’s', 'Arequipe Alpina', 'Piazza', 'Chokis', 'Minichips', 'Maní', 'Klim', 'Chocolatina Jumbo'],
-    extras: [
-      { name: 'Brownie', price: 3000 },
-      { name: 'Queso', price: 3000 },
-      { name: 'Chocmelos', price: 3000 },
-      { name: 'Chócaramo', price: 3000 },
-      { name: 'Quipitos', price: 3000 },
-      { name: 'Leche condensada', price: 3000 },
-      { name: 'Chips de chocolate', price: 3000 },
-      { name: 'Mango', price: 3000 },
-      { name: 'Oreo', price: 3000 },
-      { name: 'Milo', price: 3000 },
-      { name: 'Hershey’s', price: 3000 },
-      { name: 'Arequipe Alpina', price: 3000 },
-      { name: 'Piazza', price: 3000 },
-      { name: 'Chokis', price: 3000 },
-      { name: 'Minichips', price: 3000 },
-      { name: 'Maní', price: 3000 },
-      { name: 'Klim', price: 3000 },
-      { name: 'Chocolatina Jumbo', price: 3000 }
-    ],
+      extras:[
+  { id: 'extra1', name: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', name: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', name: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', name: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', name: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', name: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', name: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', name: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', name: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', name: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', name: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', name: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', name: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', name: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', name: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', name: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', name: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', name: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+],
     image: 'images/sencillo.png'
   },
   {
@@ -130,26 +130,26 @@ const products = [
   price: 2700,
   desc: 'Delicia helada con ingredientes premium.',
   ingredients: ['Brownie', 'Queso', 'Chocmelos', 'Chócaramo', 'Quipitos', 'Leche condensada', 'Chips de chocolate', 'Mango', 'Oreo', 'Milo', 'Hershey’s', 'Arequipe Alpina', 'Piazza', 'Chokis', 'Minichips', 'Maní', 'Klim', 'Chocolatina Jumbo'],
-  extras: [
-    { name: 'Brownie', price: 3000 },
-    { name: 'Queso', price: 3000 },
-    { name: 'Chocmelos', price: 3000 },
-    { name: 'Chócaramo', price: 3000 },
-    { name: 'Quipitos', price: 3000 },
-    { name: 'Leche condensada', price: 3000 },
-    { name: 'Chips de chocolate', price: 3000 },
-    { name: 'Mango', price: 3000 },
-    { name: 'Oreo', price: 3000 },
-    { name: 'Milo', price: 3000 },
-    { name: 'Hershey’s', price: 3000 },
-    { name: 'Arequipe Alpina', price: 3000 },
-    { name: 'Piazza', price: 3000 },
-    { name: 'Chokis', price: 3000 },
-    { name: 'Minichips', price: 3000 },
-    { name: 'Maní', price: 3000 },
-    { name: 'Klim', price: 3000 },
-    { name: 'Chocolatina Jumbo', price: 3000 }
-  ],
+    extras:[
+  { id: 'extra1', name: 'Brownie', price: 3000, desc: 'Trocito dulce y delicioso.', image: 'images/extras/brownie.png' },
+  { id: 'extra2', name: 'Queso', price: 3000, desc: 'Toque salado irresistible.', image: 'images/extras/queso.png' },
+  { id: 'extra3', name: 'Chocmelos', price: 3000, desc: 'Dulzura cremosa.', image: 'images/extras/chocmelos.png' },
+  { id: 'extra4', name: 'Chócaramo', price: 3000, desc: 'Bizcocho cubierto de chocolate.', image: 'images/extras/chocoramo.png' },
+  { id: 'extra5', name: 'Quipitos', price: 3000, desc: 'Cereal crujiente de chocolate.', image: 'images/extras/quipitos.png' },
+  { id: 'extra6', name: 'Leche condensada', price: 3000, desc: 'Toque cremoso y dulce.', image: 'images/extras/condensada.png' },
+  { id: 'extra7', name: 'Chips de chocolate', price: 3000, desc: 'Mini trocitos de felicidad.', image: 'images/extras/chips.png' },
+  { id: 'extra8', name: 'Mango', price: 3000, desc: 'Fresco y tropical.', image: 'images/extras/mango.png' },
+  { id: 'extra9', name: 'Oreo', price: 3000, desc: 'Clásica y deliciosa.', image: 'images/extras/oreo.png' },
+  { id: 'extra10', name: 'Milo', price: 3000, desc: 'Sabor a infancia.', image: 'images/extras/milo.png' },
+  { id: 'extra11', name: 'Hershey’s', price: 3000, desc: 'Chocolate premium.', image: 'images/extras/hersheys.png' },
+  { id: 'extra12', name: 'Arequipe Alpina', price: 3000, desc: 'Caramelo suave irresistible.', image: 'images/extras/arequipe.png' },
+  { id: 'extra13', name: 'Piazza', price: 3000, desc: 'Delicioso wafer con crema.', image: 'images/extras/piazza.png' },
+  { id: 'extra14', name: 'Chokis', price: 3000, desc: 'Galletas con chispas de chocolate.', image: 'images/extras/chokis.png' },
+  { id: 'extra15', name: 'Minichips', price: 3000, desc: 'Mini galletas crocantes.', image: 'images/extras/minichips.png' },
+  { id: 'extra16', name: 'Maní', price: 3000, desc: 'Salado y energético.', image: 'images/extras/mani.png' },
+  { id: 'extra17', name: 'Klim', price: 3000, desc: 'Toque lácteo suave.', image: 'images/extras/klim.png' },
+  { id: 'extra18', name: 'Chocolatina Jumbo', price: 3000, desc: 'Favorita de todos.', image: 'images/extras/jumbo.png' }
+],
   image: 'images/premium.png'
 },
 {
@@ -316,7 +316,7 @@ function renderProducts(cat) {
 
 // ====== 🔄 SINCRONIZACIÓN DE DISPONIBILIDAD CON GOOGLE SHEETS ======
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoiB5wjuWak8Z0CeHenYc93M7UR7K43dPOCRGQ8RmrZjb8CAFywjqC0wGuOWBSI-GZhw/exec'; 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxn4ouPF5ZQty8k7iKY89N8kYAfQInSMVa7ZUbZ2QghXIESfNxlP8fZ5GO3G_oAvekhQA/exec'; 
 // 👆 el mismo que usas en el admin
 
 async function fetchAvailability() {
@@ -1215,24 +1215,3 @@ checkoutOverlay.addEventListener("click", (e) => {
 
 
 
-
-// === Carrusel de promociones ===
-const track = document.querySelector('.banner-track');
-const slides = document.querySelectorAll('.banner-slide');
-const nextBtn = document.querySelector('.banner-btn.next');
-const prevBtn = document.querySelector('.banner-btn.prev');
-
-if (track && slides.length > 1) {
-  let index = 0;
-
-  function showSlide(i) {
-    index = (i + slides.length) % slides.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-  }
-
-  nextBtn.addEventListener('click', () => showSlide(index + 1));
-  prevBtn.addEventListener('click', () => showSlide(index - 1));
-
-  // Auto-slide cada 5s
-  setInterval(() => showSlide(index + 1), 5000);
-}
