@@ -404,21 +404,29 @@ function openCheckoutForm() {
     title: "📦 Datos del pedido",
     html: `
       <div class="checkout-form">
+
         <input id="name" placeholder="👤 Nombre">
         <input id="phone" placeholder="📞 Teléfono">
-        <textarea id="notes" placeholder="📝 Notas"></textarea>
 
         <label for="delivery">🚚 Tipo de pedido:</label>
         <select id="delivery">
+          <option value="">Selecciona una opción</option>
           <option value="Domicilio">Domicilio</option>
           <option value="Recogida">Recogida</option>
         </select>
 
+        <div id="address-wrapper">
+          <input id="address" placeholder="📍 Dirección completa">
+        </div>
+
         <label for="payment">💳 Método de pago:</label>
         <select id="payment">
+          <option value="">Selecciona un método</option>
           <option value="Efectivo">Efectivo</option>
           <option value="Transferencia">Transferencia</option>
         </select>
+
+        <textarea id="notes" placeholder="📝 Notas"></textarea>
       </div>
     `,
     showCancelButton: true,
@@ -430,13 +438,65 @@ function openCheckoutForm() {
       confirmButton: "btn-primary",
       cancelButton: "btn-secondary"
     },
-    preConfirm: sendOrderToWhatsApp,
+
+    /* 🔐 VALIDACIÓN REAL */
+    preConfirm: () => {
+      const popup = Swal.getPopup();
+
+      const name     = popup.querySelector("#name").value.trim();
+      const phone    = popup.querySelector("#phone").value.trim();
+      const delivery = popup.querySelector("#delivery").value;
+      const payment  = popup.querySelector("#payment").value;
+      const address  = popup.querySelector("#address")?.value.trim();
+
+      if (!name) {
+        Swal.showValidationMessage("Ingresa tu nombre");
+        return false;
+      }
+
+      if (!phone) {
+        Swal.showValidationMessage("Ingresa tu teléfono");
+        return false;
+      }
+
+      if (!delivery) {
+        Swal.showValidationMessage("Selecciona el tipo de pedido");
+        return false;
+      }
+
+      if (delivery === "Domicilio" && !address) {
+        Swal.showValidationMessage("La dirección es obligatoria para domicilio");
+        return false;
+      }
+
+      if (!payment) {
+        Swal.showValidationMessage("Selecciona un método de pago");
+        return false;
+      }
+
+      // ✅ Todo válido → enviar
+      sendOrderToWhatsApp();
+      return true;
+    },
+
     didOpen: () => {
-      // Enfocar automáticamente en el primer input
-      Swal.getPopup().querySelector("#name").focus();
+      const popup = Swal.getPopup();
+      const delivery = popup.querySelector("#delivery");
+      const addressWrapper = popup.querySelector("#address-wrapper");
+
+      addressWrapper.style.display =
+        delivery.value === "Domicilio" ? "block" : "none";
+
+      delivery.addEventListener("change", () => {
+        addressWrapper.style.display =
+          delivery.value === "Domicilio" ? "block" : "none";
+      });
+
+      popup.querySelector("#name").focus();
     }
   });
 }
+
 
 // ===============================
 // WHATSAPP
@@ -450,11 +510,28 @@ function sendOrderToWhatsApp() {
   const delivery = popup.querySelector("#delivery")?.value || "No especificado";
   const payment  = popup.querySelector("#payment")?.value || "No especificado";
 
+  // 📍 Dirección solo si es domicilio
+  const address =
+    delivery === "Domicilio"
+      ? popup.querySelector("#address")?.value.trim()
+      : null;
+
+  // 🔐 Validación premium
+  if (delivery === "Domicilio" && !address) {
+    Swal.showValidationMessage("Por favor ingresa la dirección de entrega");
+    return false;
+  }
+
   let msg = "🧾 *NUEVO PEDIDO*\n\n";
 
   msg += `👤 *Cliente:* ${name}\n`;
   msg += `📞 *Teléfono:* ${phone}\n`;
   msg += `🚚 *Tipo de pedido:* ${delivery}\n`;
+
+  if (delivery === "Domicilio") {
+    msg += `📍 *Dirección:* ${address}\n`;
+  }
+
   msg += `💳 *Método de pago:* ${payment}\n`;
   msg += `📝 *Notas:* ${notes}\n\n`;
 
@@ -472,7 +549,9 @@ function sendOrderToWhatsApp() {
 
     if (item.additions.length) {
       msg += "   ➕ *Adiciones:* ";
-      msg += item.additions.map(a => `${a.name} (+$${a.price.toLocaleString()})`).join(", ") + "\n";
+      msg += item.additions
+        .map(a => `${a.name} (+$${a.price.toLocaleString()})`)
+        .join(", ") + "\n";
     }
 
     msg += `   💵 *Subtotal:* $${calculateItemTotal(item).toLocaleString()}\n\n`;
@@ -484,18 +563,20 @@ function sendOrderToWhatsApp() {
   msg += `💰 *TOTAL A PAGAR:* $${total.toLocaleString()}\n`;
   msg += "====================";
 
-  // Limpiar carrito
+  // 🧹 Limpiar carrito
   cart = [];
   updateTotal();
   Swal.close();
 
-  // Redirigir a WhatsApp
+  // 📲 Enviar a WhatsApp
   setTimeout(() => {
-    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.location.href =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   }, 10);
 
   return true;
 }
+
 
 
 
