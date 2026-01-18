@@ -1,0 +1,848 @@
+/* ===============================
+   RESET & BASE
+================================ */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui;
+  background: #f5f5f7;
+  color: #1c1c1e;
+}
+
+/* ===============================
+   HEADER / BANNER
+================================ */
+.banner {
+  margin: 16px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #1f1f1f, #2b2b2b);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+  animation: fadeDown .6s ease;
+}
+
+.banner h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.banner p {
+  font-size: .85rem;
+  opacity: .8;
+  margin: 0;
+}
+
+.banner button {
+  margin-top: 10px;
+  align-self: flex-start;
+  background: #b7ff00;
+  color: #1c1c1e;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: .85rem;
+}
+
+/* ===============================
+   CATEGORY CHIPS
+================================ */
+.categories {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+  overflow-x: auto;
+}
+
+.category {
+  min-width: 72px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  font-size: .7rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  transition: transform .25s;
+}
+
+.category:active {
+  transform: scale(.95);
+}
+
+/* ===============================
+   PRODUCTS GRID
+================================ */
+.products {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* ===============================
+   PRODUCT CARD
+================================ */
+.card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  animation: fadeUp .5s ease;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: .75rem;
+  color: #6e6e73;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.card b {
+  margin-top: 6px;
+  font-size: .9rem;
+}
+
+/* ===============================
+   ADD BUTTON (+)
+================================ */
+.card button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #ff9298;
+  color: #1c1c1e;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  transition: transform .2s;
+}
+
+.card button:active {
+  transform: scale(.9);
+}
+
+/* ===============================
+   CART BAR (BOTTOM)
+================================ */
+.cart {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.15);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.cart span {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cart button {
+  background: #b7ff00;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+/* ===============================
+   FLOATING ADMIN BUTTON
+================================ */
+.fab {
+  position: fixed;
+  bottom: 90px;
+  right: 18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  background: #1c1c1e;
+  color: #fff;
+  font-size: 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  transition: transform .25s;
+}
+
+.fab:active {
+  transform: scale(.92);
+}
+
+/* ===============================
+   UTILITIES
+================================ */
+.hidden {
+  display: none;
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/*MODAL PARA VER EL RESUMEN DE LAS COMPRAS*/
+
+/* ===============================
+   CHECKOUT SUMMARY
+================================ */
+.checkout-summary {
+  background: #f5f5f7;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  margin-bottom: 6px;
+}
+
+.checkout-item span {
+  color: #6e6e73;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #d1d1d6;
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+
+/* ===============================
+   MODERN CHECKOUT INPUTS - DETECTA SI EL RESUMEN DE LA COMPRA
+   ES MUY EXTENSO
+================================ */
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e5ea;
+  font-size: .9rem;
+  background: #fff;
+  outline: none;
+}
+
+.checkout-form textarea {
+  resize: none;
+  min-height: 70px;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus,
+.checkout-form textarea:focus {
+  border-color: #b7ff00;
+}
+
+/* resumen scrolleable si es largo */
+.checkout-summary {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+
+/* ===============================
+   QTY CONTROLS (CHECKOUT)
+================================ */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.qty-controls button {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e5ea;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.qty-controls span {
+  min-width: 20px;
+  text-align: center;
+}
+
+.item-price {
+  font-weight: 600;
+  font-size: .85rem;
+}
+
+
+/*CSS PERFECTO PARA EL MODAL DEL PRODUCTO*/
+/* ===========================
+   MODAL BASE
+=========================== */
+.product-modal {
+  border-radius: 20px !important;
+  padding: 0 !important;
+  max-width: 420px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ===========================
+   CONTENIDO
+=========================== */
+.product-modal-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.product-header {
+  text-align: center;
+}
+
+.product-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.product-desc {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ===========================
+   SECCIONES
+=========================== */
+.product-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-section label {
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ===========================
+   CONTADOR CENTRADO
+=========================== */
+.qty-controls.premium {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 130px;
+  margin: 0 auto; /* 🔑 CENTRADO */
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 6px 12px;
+}
+
+.qty-controls.premium button {
+  border: none;
+  background: #ff8e95;
+  color: #000;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.qty-controls.premium span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ===========================
+   TOPPINGS / ADICIONES
+=========================== */
+.extras-grid {
+  width: 100%;
+  max-width: 260px;      /* 🔑 BLOQUE CENTRADO */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* cada opción */
+.extras-grid label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* lado izquierdo (checkbox + texto) */
+.extras-grid label span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left; /* 🔑 TEXTO DESDE LA IZQUIERDA */
+}
+
+/* precio / FREE */
+.extras-grid small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+
+/* ===========================
+   BADGE FREE
+=========================== */
+.badge-free {
+  background: #1fbf75;
+  color: white;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 6px;
+}
+
+/* ===========================
+   FOOTER TOTAL
+=========================== */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.product-footer span {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-footer b {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* ===========================
+   BOTÓN CONFIRMAR
+=========================== */
+.btn-primary {
+  background: #ff9298 !important;
+  color: #000 !important;
+  font-weight: 800;
+  border-radius: 16px !important;
+  padding: 14px !important;
+}
+
+/* ===========================
+   BOTÓN CERRAR
+=========================== */
+.swal2-close {
+  color: #888 !important;
+}
+
+
+/* ===============================
+   MODAL PRODUCTO – SCROLL COMPLETO
+   =============================== */
+
+.product-modal {
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column;
+}
+
+/* TODO el contenido scrollea */
+.product-modal-content {
+  max-height: 75vh;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Scroll bonito */
+.product-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.product-modal-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+}
+
+.product-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Extras sin scroll propio */
+.extras-grid {
+  max-height: none;
+  overflow: visible;
+}
+
+/* Footer se comporta como contenido normal */
+.product-footer {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* Evitar que el botón se pegue demasiado */
+.swal2-actions {
+  margin-top: 12px !important;
+}
+
+
+/* ===============================
+   CATEGORÍAS HORIZONTALES
+================================ */
+.categories {
+  display: flex;
+  gap: 12px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  margin-bottom: 8px;
+}
+
+.category {
+  min-width: 72px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  font-size: .75rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  cursor: pointer;
+  transition: transform .25s, background .25s;
+}
+
+.category:active, .category.active {
+  transform: scale(.95);
+  background: #b7ff00;
+  color: #1c1c1e;
+}
+
+/* ===============================
+   MENÚ INFERIOR
+================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -6px 20px rgba(0,0,0,.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #6e6e73;
+  cursor: pointer;
+  transition: color .25s;
+}
+
+.bottom-nav .nav-item.active {
+  color: #b7ff00;
+}
+
+.bottom-nav .nav-item span {
+  font-size: 20px;
+}
+
+
+/* ===============================
+   SCROLL SEGURO PARA PRODUCTOS
+================================ */
+.products {
+  padding-bottom: 160px; /* 🔑 espacio para carrito + bottom nav */
+}
+
+
+/* ===============================
+   BUSCADOR PREMIUM
+================================ */
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  padding: 20px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.95),
+    rgba(255,255,255,0.85)
+  );
+  backdrop-filter: blur(10px);
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 480px;
+  padding: 14px 18px;
+  font-size: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #ffffff;
+  color: #222;
+  outline: none;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+
+  transition: all 0.25s ease;
+}
+
+/* Placeholder elegante */
+.search-bar input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+/* Focus moderno */
+.search-bar input:focus {
+  border-color: #ff6b35;
+  box-shadow:
+    0 0 0 3px rgba(255,107,53,0.15),
+    0 10px 24px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+/* Mobile first */
+@media (max-width: 480px) {
+  .search-bar {
+    padding: 14px 12px;
+  }
+
+  .search-bar input {
+    font-size: 15px;
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+}
+
+
+/* ===============================
+   HEADER / BANNER PREMIUM
+================================ */
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px 22px;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff, #dc3741);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* LOGO */
+.banner-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 12px;
+
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.15));
+}
+
+/* TITULO */
+.banner h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #222;
+  letter-spacing: -0.3px;
+}
+
+/* SUBTITULO */
+.banner p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .banner-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .banner h1 {
+    font-size: 20px;
+  }
+}
+
+/* ===============================
+   BOTTOM NAV - APP PREMIUM
+================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 70px;
+  padding-bottom: env(safe-area-inset-bottom);
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-top: 1px solid rgba(0,0,0,0.08);
+  z-index: 1000;
+}
+
+/* ITEM */
+.bottom-nav .nav-item {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #444;
+  font-weight: 500;
+
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+/* ICONO */
+.bottom-nav .icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+/* TEXTO */
+.bottom-nav small {
+  font-size: 11px;
+  letter-spacing: 0.2px;
+}
+
+/* EFECTO HOVER / TAP */
+.bottom-nav .nav-item:hover {
+  transform: translateY(-2px);
+}
+
+/* COLORES POR MARCA */
+.nav-item.whatsapp {
+  color: #25d366;
+}
+
+.nav-item.instagram {
+  color: #e1306c;
+}
+
+.nav-item.facebook {
+  color: #1877f2;
+}
+
+/* ACTIVE (si lo quieres usar después) */
+.bottom-nav .nav-item.active {
+  transform: translateY(-3px);
+}
+
+/* ESPACIO PARA QUE NO TAPE CONTENIDO */
+body {
+  padding-bottom: 80px;
+}

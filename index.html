@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food App</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- FONTAWESOME CDN -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <!-- 🧩 Favicon clásico -->
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+
+  <!-- 📱 Ícono de app (iOS / Android) -->
+  <link rel="apple-touch-icon" href="./images/favicon.png">
+
+  <!-- 🧭 Configuración PWA -->
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Santana Group App">
+
+  <!-- 📜 Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  
+<style>
+/* ===============================
+   CART FLOTA SOBRE EL MENÚ INFERIOR
+================================ */
+.cart {
+  position: fixed;
+  bottom: 70px; /* 🔑 70px arriba del bottom nav */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: #fff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  border-radius: 20px;
+  z-index: 1001; /* encima del menú inferior */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cart.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.cart.hide {
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+}
+
+.cart span {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cart button {
+  background: #b7ff00;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+/* ===============================
+   MENÚ INFERIOR
+================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -6px 20px rgba(0,0,0,.1);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #6e6e73;
+  cursor: pointer;
+  transition: color .25s;
+}
+
+.bottom-nav .nav-item.active {
+  color: #b7ff00;
+}
+
+.bottom-nav .nav-item span {
+  font-size: 20px;
+}
+
+/* ===============================
+   EFECTO “BOUNCE” AL TOTAL
+================================ */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-8px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER / BANNER -->
+<header class="banner">
+  <img src="images/logo.png" alt="Logo" class="banner-logo">
+  <h1>Ordena Ahora</h1>
+  <p>Rápido, fácil y delicioso</p>
+</header>
+
+
+<!-- CATEGORÍAS HORIZONTALES -->
+<div class="search-bar">
+  <input
+    type="text"
+    id="productSearch"
+    placeholder="Buscar helados, muddíes, bebidas..."
+    oninput="searchProducts(this.value)"
+  />
+</div>
+
+
+<!-- PRODUCTOS -->
+<section id="products" class="products"></section>
+
+<!-- CARRITO FLOTANTE -->
+<footer id="cart" class="cart hide">
+  <span id="total">$0</span>
+  <button onclick="openCheckout()">Pagar</button>
+</footer>
+
+<!-- MENÚ INFERIOR PREMIUM -->
+<nav class="bottom-nav">
+  <a
+    href="https://wa.me/573117650829"
+    target="_blank"
+    class="nav-item whatsapp"
+  >
+    <span class="icon">💬</span>
+    <small>WhatsApp</small>
+  </a>
+
+  <a
+    href="https://www.instagram.com/muud.col/"
+    target="_blank"
+    class="nav-item instagram"
+  >
+    <span class="icon">📸</span>
+    <small>Instagram</small>
+  </a>
+
+  <a
+    href="https://www.facebook.com/profile.php?id=61573196803550&ref=pl_edit_ig_profile_ac"
+    target="_blank"
+    class="nav-item facebook"
+  >
+    <span class="icon">📘</span>
+    <small>Facebook</small>
+  </a>
+</nav>
+
+
+<script src="js/app.js"></script>
+<script>
+// ===============================
+// MOSTRAR/Ocultar carrito flotante
+// ===============================
+function showCart() {
+  const cartEl = document.getElementById("cart");
+  if (!cartEl) return;
+
+  if (cart.length > 0) {
+    cartEl.classList.remove("hide");
+    cartEl.classList.add("show");
+    cartEl.style.animation = "bounce 0.5s";
+  } else {
+    cartEl.classList.remove("show");
+    cartEl.classList.add("hide");
+  }
+}
+
+// ===============================
+// ACTUALIZAR TOTAL CON EFECTO
+// ===============================
+function updateTotal() {
+  const total = cart.reduce((sum, item) => {
+    let t = item.basePrice * item.qty;
+    item.toppings.forEach(e => t += e.price * e.qty);
+    item.additions.forEach(e => t += e.price * e.qty);
+    return sum + t;
+  }, 0);
+
+  document.getElementById("total").innerText = "$" + total.toLocaleString();
+
+  showCart(); // 🔹 llamar al mostrar carrito
+}
+</script>
+
+</body>
+</html>

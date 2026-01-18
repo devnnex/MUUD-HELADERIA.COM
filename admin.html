@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Productos</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- FONTAWESOME CDN -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <!-- 🧩 Favicon clásico -->
+  <link rel="icon" type="image/png" href="./images/favicon1.png">
+
+  <!-- 📱 Ícono de app (iOS / Android) -->
+  <link rel="apple-touch-icon" href="./images/favicon1.png">
+
+  <!-- 🧭 Configuración PWA -->
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Muud Heladeria App">
+
+  <!-- 📜 Manifest -->
+  <link rel="manifest" href="./manifest.json">
+<style>
+/* ===============================
+   RESET & BASE
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+}
+body {
+  background: #f5f5f7;
+  color: #1c1c1e;
+}
+
+/* ===============================
+   HEADER / BANNER
+================================ */
+.banner {
+  padding: 20px;
+  margin: 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#1f1f1f,#2b2b2b);
+  color: #fff;
+  box-shadow: 0 15px 40px rgba(0,0,0,.25);
+  text-align: center;
+  animation: fadeDown 0.6s ease;
+}
+.banner h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* ===============================
+   NAV BOTONES ADMIN
+================================ */
+.admin-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px;
+  flex-wrap: wrap;
+}
+.admin-nav button {
+  background: #fff;
+  color: #1c1c1e;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+  transition: transform 0.2s, background 0.25s;
+}
+.admin-nav button:hover {
+  transform: translateY(-2px);
+  background: #b7ff00;
+  color: #1c1c1e;
+}
+
+/* ===============================
+   PRODUCTS GRID
+================================ */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* ===============================
+   CARD PRODUCTOS
+================================ */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+.card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.card p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+.card small {
+  color: #6e6e73;
+  font-size: 0.8rem;
+}
+
+/* ===============================
+   CARD BUTTONS
+================================ */
+.card button {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.25s;
+}
+.card button:first-of-type {
+  background: #1c1c1e;
+  color: #fff;
+}
+.card button:first-of-type:hover {
+  background: #333;
+}
+.card button:last-of-type {
+  background: #ff4d4d;
+  color: #fff;
+}
+.card button:last-of-type:hover {
+  background: #ff1a1a;
+}
+
+
+/* ===============================
+   NUMERACIÓN DE CARDS
+================================ */
+.card {
+  position: relative;
+}
+
+.card::before {
+  content: attr(data-index);
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: #b7ff00;
+  color: #1c1c1e;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+
+/* ===============================
+   TOOLBAR ADMIN
+================================ */
+.toolbar {
+  margin: 0 16px 12px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.toolbar select {
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 1px solid #e5e5ea;
+  font-weight: 600;
+}
+
+.counter {
+  font-weight: 700;
+  color: #1c1c1e;
+}
+
+.counter span {
+  color: #6e6e73;
+  font-weight: 600;
+}
+
+
+/* ===============================
+   PAGINACIÓN
+================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px;
+}
+
+.page-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,.1);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.page-btn.active {
+  background: #1c1c1e;
+  color: #fff;
+}
+
+.page-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+/* ===============================
+   FAB
+================================ */
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #b7ff00;
+  color: #1c1c1e;
+  font-size: 32px;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 18px 40px rgba(0,0,0,.4);
+}
+
+/* ===============================
+   SWEETALERT CUSTOM
+================================ */
+.swal2-popup {
+  border-radius: 20px !important;
+  padding: 20px !important;
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+}
+.swal2-title {
+  font-weight: 800 !important;
+  font-size: 1.3rem !important;
+}
+.swal2-input, .swal2-textarea, .swal2-select {
+  border-radius: 14px !important;
+  border: 1px solid #e5e5ea !important;
+  padding: 12px !important;
+  font-size: 0.95rem !important;
+}
+.swal2-input:focus, .swal2-textarea:focus, .swal2-select:focus {
+  border-color: #b7ff00 !important;
+  box-shadow: 0 0 10px rgba(183,255,0,.3) !important;
+}
+.swal2-confirm {
+  background: #1c1c1e !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+  padding: 10px 18px !important;
+}
+.swal2-cancel {
+  background: #ff4d4d !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+  padding: 10px 18px !important;
+}
+.swal2-close {
+  color: #888 !important;
+  font-size: 18px !important;
+}
+
+/* ===============================
+   ANIMACIONES
+================================ */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   LOADER GLOBAL
+================================ */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(245,245,247,.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn .2s ease;
+}
+
+.loader.hidden {
+  display: none;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 4px solid #e5e5ea;
+  border-top-color: #1c1c1e;
+  animation: spin .8s linear infinite;
+  margin-bottom: 12px;
+}
+
+.loader p {
+  font-weight: 600;
+  color: #1c1c1e;
+  font-size: 0.95rem;
+}
+
+/* Animaciones */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ===============================
+   SWEETALERT CAMPOS AVANZADOS
+================================ */
+.swal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.swal-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6e6e73;
+  padding-left: 4px;
+}
+
+.swal-field input,
+.swal-field textarea,
+.swal-field select {
+  border-radius: 14px !important;
+  border: 1px solid #e5e5ea !important;
+  padding: 12px !important;
+  font-size: 0.95rem !important;
+}
+
+
+/* ===============================
+   SWEETALERT PREMIUM FORM
+================================ */
+.swal2-popup {
+  border-radius: 24px !important;
+  padding: 26px !important;
+  max-width: 420px !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35) !important;
+  animation: modalIn .35s ease;
+}
+
+.swal2-title {
+  font-size: 1.4rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 18px !important;
+}
+
+/* Campo completo */
+.swal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.swal-field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6e6e73;
+  letter-spacing: .02em;
+}
+
+/* Inputs FULL */
+.swal-field input,
+.swal-field textarea,
+.swal-field select {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #e5e5ea;
+  padding: 14px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #fafafa;
+  transition: all .25s ease;
+}
+
+.swal-field textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+.swal-field input::placeholder,
+.swal-field textarea::placeholder {
+  color: #9b9ba0;
+  font-weight: 500;
+}
+
+/* Focus elegante */
+.swal-field input:focus,
+.swal-field textarea:focus,
+.swal-field select:focus {
+  outline: none;
+  background: #fff;
+  border-color: #b7ff00;
+  box-shadow: 0 0 0 4px rgba(183,255,0,.25);
+}
+
+/* Botones */
+.swal2-confirm {
+  background: #1c1c1e !important;
+  border-radius: 16px !important;
+  padding: 12px 20px !important;
+  font-weight: 800 !important;
+  letter-spacing: .03em;
+}
+
+.swal2-cancel {
+  border-radius: 16px !important;
+  font-weight: 700 !important;
+}
+
+/* Animación */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <h1>🛠 Admin Productos</h1>
+</header>
+
+<nav class="admin-nav">
+  <button onclick="setMode('productos')">Productos</button>
+  <button onclick="setMode('adiciones')">Adiciones</button>
+  <button onclick="setMode('toppings')">Toppings</button>
+</nav>
+
+<div class="toolbar">
+  <div class="counter">
+    Mostrando <span id="visibleCount">0</span> de <span id="totalCount">0</span>
+  </div>
+
+  <select onchange="changeLimit(this.value)">
+    <option value="8">8 por página</option>
+    <option value="12" selected>12 por página</option>
+    <option value="20">20 por página</option>
+    <option value="50">50 por página</option>
+  </select>
+</div>
+
+<section class="products" id="adminProducts"></section>
+
+<div class="pagination" id="pagination"></div>
+
+
+<button class="fab" onclick="openForm()">＋</button>
+
+
+<div id="loader" class="loader hidden">
+  <div class="spinner"></div>
+  <p>Cargando información…</p>
+</div>
+
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbwork3f4AGfa3_rMQOxrzoTm8tMIrFQ2u0UsUW1hfBdqyDng67FUPaKzcnuz7dILsL-/exec";
+
+function showLoader() {
+  document.getElementById("loader").classList.remove("hidden");
+}
+
+function hideLoader() {
+  document.getElementById("loader").classList.add("hidden");
+}
+
+
+let products = [];
+let currentMode = "productos"; // 🔥 MUY IMPORTANTE
+
+load();
+
+/* ===============================
+   CARGAR DATOS SEGÚN MODO
+================================ */
+function load() {
+  showLoader();
+
+  let action = "getProducts";
+  if (currentMode === "toppings") action = "getToppings";
+  if (currentMode === "adiciones") action = "getAdditions";
+
+  fetch(`${API}?action=${action}`)
+    .then(r => r.json())
+    .then(d => {
+      products = d;
+      render();
+    })
+    .finally(() => hideLoader());
+}
+
+
+
+let page = 1;
+let limit = 12;
+
+function changeLimit(v) {
+  limit = Number(v);
+  page = 1;
+  render();
+}
+
+
+/* ===============================
+   RENDER DINÁMICO
+================================ */
+function render() {
+  const c = document.getElementById("adminProducts");
+  const p = document.getElementById("pagination");
+
+  c.innerHTML = "";
+  p.innerHTML = "";
+
+  document.getElementById("totalCount").innerText = products.length;
+
+  const start = (page - 1) * limit;
+  const end = start + limit;
+  const visible = products.slice(start, end);
+
+  document.getElementById("visibleCount").innerText = visible.length;
+
+  visible.forEach((item, i) => {
+    let html = "";
+
+    if (currentMode === "productos") {
+      html = `
+        <div class="card" data-index="${start + i + 1}">
+          <h3>${item[1]}</h3>
+          <p>$${Number(item[3]).toLocaleString()}</p>
+          <small>${item[4]}</small>
+          <button onclick="edit(${item[0]})">Editar</button>
+          <button onclick="remove(${item[0]})">Eliminar</button>
+        </div>`;
+    }
+
+    if (currentMode === "toppings") {
+      html = `
+        <div class="card" data-index="${start + i + 1}">
+          <h3>${item[1]}</h3>
+          <small>${item[2]}</small>
+          <button onclick="edit(${item[0]})">Editar</button>
+          <button onclick="remove(${item[0]})">Eliminar</button>
+        </div>`;
+    }
+
+    if (currentMode === "adiciones") {
+      html = `
+        <div class="card" data-index="${start + i + 1}">
+          <h3>${item[1]}</h3>
+          <p>$${Number(item[2]).toLocaleString()}</p>
+          <small>${item[3]}</small>
+          <button onclick="edit(${item[0]})">Editar</button>
+          <button onclick="remove(${item[0]})">Eliminar</button>
+        </div>`;
+    }
+
+    c.innerHTML += html;
+  });
+
+  const totalPages = Math.ceil(products.length / limit);
+
+  for (let i = 1; i <= totalPages; i++) {
+    p.innerHTML += `
+      <button class="page-btn ${i === page ? "active" : ""}"
+        onclick="page=${i};render()">${i}</button>
+    `;
+  }
+}
+
+
+/* ===============================
+   MODAL NUEVO ITEM
+================================ */
+function openForm() {
+  Swal.fire({
+    title: "Nuevo ítem",
+    html: `
+      <div class="swal-field">
+        <label>Tipo de ítem</label>
+        <select id="type" onchange="updateForm()">
+          <option value="productos">Producto</option>
+          <option value="toppings">Topping</option>
+          <option value="adiciones">Adición</option>
+        </select>
+      </div>
+      <div id="dynamicForm"></div>
+    `,
+    showCancelButton: true,
+    confirmButtonText: "Guardar",
+    cancelButtonText: "Cancelar",
+    focusConfirm: false,
+    allowOutsideClick: false,
+    showLoaderOnConfirm: true,
+
+    didOpen: () => {
+      document.getElementById("type").value = currentMode;
+      updateForm();
+    },
+
+   preConfirm: () => {
+  const type = document.getElementById("type").value;
+
+  if (!window.n || !n.value.trim()) {
+    Swal.showValidationMessage("El nombre es obligatorio");
+    return false;
+  }
+
+  let url = `${API}?action=addProduct&sheet=${type}&nombre=${encodeURIComponent(n.value)}`;
+
+  if (type === "productos") {
+    url += `&precio=${p.value}&descripcion=${encodeURIComponent(d.value)}&estado=${e.value}`;
+  }
+  if (type === "adiciones") {
+    url += `&precio=${p.value}&estado=${e.value}`;
+  }
+  if (type === "toppings") {
+    url += `&estado=${e.value}`;
+  }
+
+  // ⚠️ SOLO FETCH
+  return fetch(url);
+}
+,
+
+    willClose: () => {
+      hideLoader();
+    }
+
+}).then(result => {
+  hideLoader();
+
+  if (result.isConfirmed) {
+    load(); // 🔥 AQUÍ sí
+    Swal.fire({
+      icon: "success",
+      title: "Guardado",
+      text: "El ítem fue agregado correctamente",
+      timer: 1000,
+      showConfirmButton: false
+    });
+  }
+});
+
+}
+
+
+
+
+
+
+
+
+
+function updateForm() {
+  const type = document.getElementById("type").value;
+  const c = document.getElementById("dynamicForm");
+
+  let html = `
+    <div class="swal-field">
+      <label>Nombre</label>
+      <input id="n" placeholder="Ej: Hamburguesa Doble">
+    </div>
+  `;
+
+  if (type === "productos") {
+    html += `
+      <div class="swal-field">
+        <label>Precio</label>
+        <input id="p" type="number" placeholder="Ej: 15000">
+      </div>
+
+      <div class="swal-field">
+        <label>Descripción</label>
+        <textarea id="d" placeholder="Describe brevemente el producto"></textarea>
+      </div>
+
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="disponible">Disponible</option>
+          <option value="agotado">Agotado</option>
+        </select>
+      </div>
+    `;
+  }
+
+  if (type === "adiciones") {
+    html += `
+      <div class="swal-field">
+        <label>Precio</label>
+        <input id="p" type="number" placeholder="Ej: 3000">
+      </div>
+
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="disponible">Disponible</option>
+          <option value="agotado">Agotado</option>
+        </select>
+      </div>
+    `;
+  }
+
+  if (type === "toppings") {
+    html += `
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+    `;
+  }
+
+  c.innerHTML = html;
+}
+
+
+
+/* ===============================
+   EDITAR ITEM
+================================ */
+function edit(id) {
+  const p = products.find(x => x[0] == id);
+
+  let html = `
+    <div class="swal-field">
+      <label>Nombre</label>
+      <input id="n" placeholder="Nombre" value="${p[1]}">
+    </div>
+  `;
+
+  if (currentMode === "productos") {
+    html += `
+      <div class="swal-field">
+        <label>Precio</label>
+        <input id="p2" type="number" value="${p[3]}">
+      </div>
+
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="disponible" ${p[4]=="disponible"?"selected":""}>Disponible</option>
+          <option value="agotado" ${p[4]=="agotado"?"selected":""}>Agotado</option>
+        </select>
+      </div>
+    `;
+  }
+
+  if (currentMode === "adiciones") {
+    html += `
+      <div class="swal-field">
+        <label>Precio</label>
+        <input id="p2" type="number" value="${p[2]}">
+      </div>
+
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="disponible" ${p[3]=="disponible"?"selected":""}>Disponible</option>
+          <option value="agotado" ${p[3]=="agotado"?"selected":""}>Agotado</option>
+        </select>
+      </div>
+    `;
+  }
+
+  if (currentMode === "toppings") {
+    html += `
+      <div class="swal-field">
+        <label>Estado</label>
+        <select id="e">
+          <option value="activo" ${p[2]=="activo"?"selected":""}>Activo</option>
+          <option value="inactivo" ${p[2]=="inactivo"?"selected":""}>Inactivo</option>
+        </select>
+      </div>
+    `;
+  }
+
+  Swal.fire({
+    title: "Editar ítem",
+    html,
+    showCancelButton: true,
+    confirmButtonText: "Guardar cambios",
+    cancelButtonText: "Cancelar",
+    focusConfirm: false,
+    allowOutsideClick: false,
+    showLoaderOnConfirm: true,
+
+    preConfirm: () => {
+      if (!n.value.trim()) {
+        Swal.showValidationMessage("El nombre es obligatorio");
+        return false;
+      }
+
+      let url = `${API}?action=updateProduct&sheet=${currentMode}&id=${id}&nombre=${encodeURIComponent(n.value)}`;
+
+      if (currentMode !== "toppings") {
+        url += `&precio=${p2.value}`;
+      }
+
+      url += `&estado=${e.value}`;
+
+      return fetch(url)
+        .then(load)
+        .catch(() => {
+          Swal.showValidationMessage("Error al actualizar");
+        });
+    }
+
+  }).then(r => {
+    if (r.isConfirmed) {
+      Swal.fire({
+        icon: "success",
+        title: "Actualizado",
+        text: "El ítem fue actualizado correctamente",
+        timer: 1000,
+        showConfirmButton: false
+      }).then(() => location.reload());
+    }
+  });
+}
+
+
+/* ===============================
+   ELIMINAR ITEM
+================================ */
+function remove(id) {
+  Swal.fire({
+    title: "¿Eliminar ítem?",
+    text: "Esta acción no se puede deshacer",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+    allowOutsideClick: false,
+    showLoaderOnConfirm: true,
+
+    preConfirm: () => {
+      return fetch(`${API}?action=deleteProduct&sheet=${currentMode}&id=${id}`)
+        .then(load)
+        .catch(() => {
+          Swal.showValidationMessage("Error al eliminar");
+        });
+    }
+
+  }).then(r => {
+    if (r.isConfirmed) {
+      Swal.fire({
+        icon: "success",
+        title: "Eliminado",
+        text: "El ítem fue eliminado",
+        timer: 1000,
+        showConfirmButton: false
+      }).then(() => location.reload());
+    }
+  });
+}
+
+
+/* ===============================
+   CAMBIAR MODO (BOTONES)
+================================ */
+function setMode(mode) {
+  currentMode = mode;
+  load();
+}
+</script>
+
+</body>
+</html>
